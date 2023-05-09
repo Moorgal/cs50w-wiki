@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Entry</h1>
+
+    <ul>
+        {% if entrypage == None %}
+            <h1>Take me home</h1>
+        {% else %}
+            <h1>Where i belong</h1>
+        {% endif %}
+    </ul>
+
+{% endblock %}
