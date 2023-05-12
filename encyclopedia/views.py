@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django import forms
+from django.http import HttpResponse
 
 from . import util
 
@@ -17,6 +18,19 @@ def entry_page(request, entrypage):
 def search_page(request):
     if request.method == "POST":
         form = request.POST['q']
-    return render(request, "encyclopedia/entrypage.html", {
-        "entrypage": form
-    })
+        entries = util.list_entries()
+        pages = []
+        for entry in entries:
+            if entry.lower() in form.lower():
+                pages.append(entry) 
+        len_pages = len(pages)
+        if len_pages == 1:
+            return render(request, "encyclopedia/entrypage.html",{
+            "entrypage": util.get_entry(pages[0])})
+        else:
+            problem = "no cookie in the jar"
+            return render(request, "encyclopedia/error.html",{
+                "error": problem
+            })
+        
+    

@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Entry</h1>
+    <h1>All Pages</h1>
 
     <ul>
-        <li>{% searchpage %}</li>
-        
+        {% for entry in pages %}
+            <li><a href="/wiki/{{entry}}">{{ entry }}</a></li>
+        {% endfor %}
     </ul>
 
 {% endblock %}
