@@ -37,3 +37,5 @@ def search_page(request):
             })
         
     
+def new_page(request):
+    return HttpResponse('it works')
