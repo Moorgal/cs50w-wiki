@@ -4,6 +4,9 @@ from django.http import HttpResponse
 
 from . import util
 
+class NewPage(forms.Form):
+    title = forms.CharField(max_length=100)
+    content = forms.CharField(widget=forms.Textarea)
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -41,12 +44,13 @@ def new_page(request):
     if request.method == "GET":
         return render(request, "encyclopedia/new_page.html")
     else:
-        form_title = request.POST['title']
-        form_content = request.POST['content']
-        if form_title.is_valid() & form_content.is_valid():
-            title = form_title.cleaned_data["title"]
-            content = form_content.cleaned_data["content"]
+        form = NewPage(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
             util.save_entry(title, content)
+            return render(request, "encyclopedia/index.html", {
+            "entries": util.list_entries()})
         else:
             problem = "not okey"
             return render(request, "encyclopedia/error.html",{
