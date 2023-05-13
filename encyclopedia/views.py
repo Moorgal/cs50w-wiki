@@ -46,13 +46,20 @@ def new_page(request):
     else:
         form = NewPage(request.POST)
         if form.is_valid():
-            title = form.cleaned_data["title"]
+            title = form.cleaned_data["title"].capitalize()
             content = form.cleaned_data["content"]
-            util.save_entry(title, content)
-            return render(request, "encyclopedia/index.html", {
-            "entries": util.list_entries()})
+            check_if_exist = util.get_entry(title)
+            if check_if_exist == None:
+                util.save_entry(title, content)
+                return render(request, "encyclopedia/index.html", {
+                "entries": util.list_entries()})
+            else:
+                problem = "page already exist"
+                return render(request, "encyclopedia/error.html",{
+                    "error": problem
+                })
         else:
-            problem = "not okey"
+            problem = "please fill entries"
             return render(request, "encyclopedia/error.html",{
                 "error": problem
             })
