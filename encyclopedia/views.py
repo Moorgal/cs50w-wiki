@@ -38,4 +38,17 @@ def search_page(request):
         
     
 def new_page(request):
-    return HttpResponse('it works')
+    if request.method == "GET":
+        return render(request, "encyclopedia/new_page.html")
+    else:
+        form_title = request.POST['title']
+        form_content = request.POST['content']
+        if form_title.is_valid() & form_content.is_valid():
+            title = form_title.cleaned_data["title"]
+            content = form_content.cleaned_data["content"]
+            util.save_entry(title, content)
+        else:
+            problem = "not okey"
+            return render(request, "encyclopedia/error.html",{
+                "error": problem
+            })
