@@ -63,3 +63,6 @@ def new_page(request):
             return render(request, "encyclopedia/error.html",{
                 "error": problem
             })
+        
+def edit_page(request):
+    return HttpResponse("it works")

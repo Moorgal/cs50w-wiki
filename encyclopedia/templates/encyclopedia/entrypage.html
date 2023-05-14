@@ -5,7 +5,18 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Entry</h1>
+
+    <form action="{% url 'edit_page' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="title" name="title">
+        <input type="hidden" id="content" name="content">
+        <input type="submit" value="Edit page">
+    </form>
+
+
+
+<button>delete page</button>
+<h1>Entry</h1>
 
     <ul>
         {% if entrypage == None %}
