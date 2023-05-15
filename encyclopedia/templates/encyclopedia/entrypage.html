@@ -6,12 +6,7 @@
 
 {% block body %}
 
-    <form action="{% url 'edit_page' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" id="title" name="title">
-        <input type="hidden" id="content" name="content">
-        <input type="submit" value="Edit page">
-    </form>
+<p><a href="% url 'edit-page' id %"">Edit page</a></p>
 
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django import forms
 from django.http import HttpResponse
 
@@ -64,5 +64,6 @@ def new_page(request):
                 "error": problem
             })
         
-def edit_page(request):
-    return HttpResponse("it works")
+def edit_page(request, id):
+        return HttpResponse(id)
+
