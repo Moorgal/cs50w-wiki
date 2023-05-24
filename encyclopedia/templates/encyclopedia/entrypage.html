@@ -6,7 +6,10 @@
 
 {% block body %}
 
-<p><a href="% url 'edit-page' id %"">Edit page</a></p>
+<form action="{% url 'edit_page'%}" method="POST">
+    {% csrf_token %}
+    <input class="search" type="hidden" name="title">
+</form>
 
 
 

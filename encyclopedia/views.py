@@ -64,6 +64,10 @@ def new_page(request):
                 "error": problem
             })
         
-def edit_page(request, id):
-        return HttpResponse(id)
+def edit_page(request, title):
+        if request.method == "POST":
+            data = request.POST[title]
+            return render(request, "encyclopedia/error.html",{
+                "error": data
+            })
 
