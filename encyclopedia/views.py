@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django import forms
-from django.http import HttpResponse
+import markdown2
 
 from . import util
 
@@ -15,6 +15,7 @@ def index(request):
 
 def entry_page(request, entrypage):
     return render(request, "encyclopedia/entrypage.html", {
+        "title" : entrypage,
         "entrypage": util.get_entry(entrypage)
     })
 
@@ -42,7 +43,10 @@ def search_page(request):
     
 def new_page(request):
     if request.method == "GET":
-        return render(request, "encyclopedia/new_page.html")
+        form  = NewPage()
+        return render(request, "encyclopedia/new_page.html", {
+            'form': form
+        })
     else:
         form = NewPage(request.POST)
         if form.is_valid():
@@ -65,9 +69,12 @@ def new_page(request):
             })
         
 def edit_page(request, title):
-        if request.method == "POST":
-            data = request.POST[title]
-            return render(request, "encyclopedia/error.html",{
-                "error": data
-            })
+    return render(request, "encyclopedia/edit_page.html", {
+        "title" : title,
+        "content": util.get_entry(title)
+    })
+
+
+            
+    
 

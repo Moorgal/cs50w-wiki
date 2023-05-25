@@ -5,16 +5,8 @@
 {% endblock %}
 
 {% block body %}
-
-<form action="{% url 'edit_page'%}" method="POST">
-    {% csrf_token %}
-    <input class="search" type="hidden" name="title">
-</form>
-
-
-
-<button>delete page</button>
-<h1>Entry</h1>
+<a href="{% url 'edit_page' title %}">Edit</a>
+<h1>{{title}}</h1>
 
     <ul>
         {% if entrypage == None %}
