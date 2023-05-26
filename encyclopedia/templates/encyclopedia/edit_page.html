@@ -8,12 +8,12 @@
 
 <h1>Create New Page</h1>
 
-<form  action="{% url 'new_page' %}" method="post">
+<form  action="{% url 'save_page' %}" method="post">
     {% csrf_token %}
   <label for="title">Title:</label><br>
   <input type="text" id="title" name="title" value="{{title}}"><br>
   <label for="content">Content:</label><br>
-  <textarea id="content" name="content" value="{{content}}">{{content}}</textarea><br>
+  <textarea id="content" name="content">{{content}}</textarea><br>
   <input type="submit" value="Save">
 </form>
 

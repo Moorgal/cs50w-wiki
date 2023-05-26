@@ -78,7 +78,27 @@ def edit_page(request):
             "content": content
         })
 
-
+def save_page(request):
+        if request.method == "POST":
+            form = NewPage(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data["title"].capitalize()
+                content = form.cleaned_data["content"]
+                check_if_exist = util.get_entry(title)
+                if check_if_exist == None:
+                    util.save_entry(title, content)
+                    return render(request, "encyclopedia/index.html", {
+                    "entries": util.list_entries()})
+                else:
+                    problem = "page already exist"
+                    return render(request, "encyclopedia/error.html",{
+                    "error": problem
+                    })
+            else:
+                problem = "please fill entries"
+                return render(request, "encyclopedia/error.html",{
+                "error": problem
+                })
 
             
     
