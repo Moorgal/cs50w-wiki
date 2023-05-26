@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django import forms
 from django.http import HttpResponse
+import random
 import markdown2
 
 from . import util
@@ -108,3 +109,10 @@ def delete_page(request):
         util.delete_entry(title)
         return redirect('index')
 
+def random_page(request):
+    pages = util.list_entries()
+    entrypage = random.choice(pages)
+    return render(request, "encyclopedia/entrypage.html", {
+        "title" : entrypage,
+        "entrypage": util.get_entry(entrypage)
+    })
