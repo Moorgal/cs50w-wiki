@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block body %}
-<a href="{% url 'edit_page' title %}">Edit</a>
+<form  action="{% url 'edit_page' %}" method="post">
+    {% csrf_token %}
+  <input type="hidden" name=title value="{{title}}">
+  <input type="submit" value="Edit">
+</form>
 <h1>{{title}}</h1>
 
     <ul>

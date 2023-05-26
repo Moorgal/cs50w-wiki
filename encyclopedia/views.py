@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django import forms
+from django.http import HttpResponse
 import markdown2
 
 from . import util
@@ -68,11 +69,15 @@ def new_page(request):
                 "error": problem
             })
         
-def edit_page(request, title):
-    return render(request, "encyclopedia/edit_page.html", {
-        "title" : title,
-        "content": util.get_entry(title)
-    })
+def edit_page(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        content = util.get_entry(title)
+        return render(request, "encyclopedia/edit_page.html",{
+            "title": title,
+            "content": content
+        })
+
 
 
             
