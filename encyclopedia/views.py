@@ -94,6 +94,17 @@ def save_page(request):
                 "error": problem
                 })
 
-            
-    
+def make_sure_page(request):
+    if request.method == "POST":
+        title = request.POST['make_sure']
+        return render(request, "encyclopedia/make_sure.html", {
+            "name": title
+        })
+
+def delete_page(request):
+    if request.method == "POST":
+        title = request.POST['delete']
+        print(title)
+        util.delete_entry(title)
+        return redirect('index')
 

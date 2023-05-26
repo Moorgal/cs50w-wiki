@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+<h1>{{name}}</h1>
+<p>are you sure you want to delete "{{name}}?"</p>
+<a href="{% url 'index' %}">go back</a>
+<form  action="{% url 'delete_page' %}" method="post">
+    {% csrf_token %}
+  <input type="hidden" name=delete value="{{name}}">
+  <input type="submit" value="Delete">
+</form>
+
+
+
+{% endblock %}
