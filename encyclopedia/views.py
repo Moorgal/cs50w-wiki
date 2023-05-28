@@ -34,7 +34,7 @@ def search_page(request):
         len_pages = len(pages)
         if len_pages == 1:
             return render(request, "encyclopedia/entrypage.html",{
-            "entrypage": util.get_entry(pages[0])})
+            "entrypage": util.converter(util.get_entry(pages[0]))})
         elif len_pages > 1:
             return render(request, "encyclopedia/search_page.html",{
             "pages": pages})
@@ -107,7 +107,6 @@ def make_sure_page(request):
 def delete_page(request):
     if request.method == "POST":
         title = request.POST['delete']
-        print(title)
         util.delete_entry(title)
         return redirect('index')
 
@@ -116,5 +115,5 @@ def random_page(request):
     entrypage = random.choice(pages)
     return render(request, "encyclopedia/entrypage.html", {
         "title" : entrypage,
-        "entrypage": util.get_entry(entrypage)
+        "entrypage": util.converter(util.get_entry(entrypage))
     })

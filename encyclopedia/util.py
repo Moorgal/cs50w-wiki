@@ -2,7 +2,7 @@ import re
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-import markdown
+from markdown2 import Markdown
 
 def list_entries():
     """
@@ -41,6 +41,5 @@ def delete_entry(title):
         default_storage.delete(file)
 
 def converter(title):
-     html = get_entry(title)
-     md = markdown.markdown()
-     return md.convert(html)
+     markdowner = Markdown()
+     return markdowner.convert(title)

@@ -15,13 +15,11 @@
   <input type="hidden" name=make_sure value="{{title}}">
   <input type="submit" value="Delete">
 </form>
-<h1>{{title}}</h1>
-
     <ul>
-        {% if content == None %}
+        {% if entrypage == None %}
             <h1>nope i do not have it</h1>
         {% else %}
-            <h1>{{content}}</h1>
+            <h1>{{entrypage|safe}}</h1>
         {% endif %}
     </ul>
 
