@@ -39,7 +39,7 @@ def search_page(request):
             return render(request, "encyclopedia/search_page.html",{
             "pages": pages})
         else:
-            problem = "no cookie in the jar"
+            problem = "This page does not exist"
             return render(request, "encyclopedia/error.html",{
                 "error": problem
             })
@@ -92,7 +92,7 @@ def save_page(request):
                 "entries": util.list_entries()})
 
             else:
-                problem = "please fill entries"
+                problem = "please fill both entries"
                 return render(request, "encyclopedia/error.html",{
                 "error": problem
                 })

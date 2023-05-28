@@ -5,19 +5,23 @@
 {% endblock %}
 
 {% block body %}
-<form  action="{% url 'edit_page' %}" method="post">
-    {% csrf_token %}
-  <input type="hidden" name=title value="{{title}}">
-  <input type="submit" value="Edit">
-</form>
-<form  action="{% url 'make_sure_page' %}" method="post">
-    {% csrf_token %}
-  <input type="hidden" name=make_sure value="{{title}}">
-  <input type="submit" value="Delete">
-</form>
+<div style="display: flex; justify-content: space-between;">
+    <form  action="{% url 'edit_page' %}" method="post" style="padding: 2rem">
+        {% csrf_token %}
+      <input type="hidden" name=title value="{{title}}">
+      <input type="submit" value="Edit">
+    </form>
+    <form  action="{% url 'make_sure_page' %}" method="post" style="padding: 2rem">
+        {% csrf_token %}
+      <input type="hidden" name=make_sure value="{{title}}">
+      <input type="submit" value="Delete">
+    </form>
+</div>
+
     <ul>
         {% if entrypage == None %}
-            <h1>nope i do not have it</h1>
+            <h1>Error</h1>
+            <p>This page does not exist</p>
         {% else %}
             <h1>{{entrypage|safe}}</h1>
         {% endif %}

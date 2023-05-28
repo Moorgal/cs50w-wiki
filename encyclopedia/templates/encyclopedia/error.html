@@ -6,9 +6,11 @@
 
 {% block body %}
 
-<h1>{{error}}</h1>
+<h1>Error</h1>
 <p>{{error}}</p>
 
-
+<div>
+    <a href="{% url 'index' %}">Back</a>
+</div>
 
 {% endblock %}

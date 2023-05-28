@@ -42,4 +42,7 @@ def delete_entry(title):
 
 def converter(title):
      markdowner = Markdown()
-     return markdowner.convert(title)
+     if title == None:
+          return None
+     else:
+          return markdowner.convert(title)
