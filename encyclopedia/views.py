@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django import forms
 from django.http import HttpResponse
 import random
-import markdown2
-
 from . import util
+
+
 
 class NewPage(forms.Form):
     title = forms.CharField(max_length=100)
@@ -16,9 +16,11 @@ def index(request):
     })
 
 def entry_page(request, entrypage):
+    html = util.get_entry(entrypage)
+    content = util.converter(html)
     return render(request, "encyclopedia/entrypage.html", {
         "title" : entrypage,
-        "entrypage": util.get_entry(entrypage)
+        "entrypage": content
     })
 
 def search_page(request):
